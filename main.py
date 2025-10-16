@@ -33,11 +33,11 @@ def create_fallback_icon():
 
 def get_application_icon():
     """Get the application icon from the specified path"""
-    # مسیرهای ممکن برای آیکون
+    # Possible paths for the icon
     possible_paths = [
-        # مسیر اصلی آیکون که کاربر قرار داده
+        # Main icon path where user placed it
         "gui/icons/weather_icon.ico",
-        # مسیرهای جایگزین
+        # Alternative paths
         "./gui/icons/weather_icon.ico",
         "weather_icon.ico",
         "./weather_icon.ico",
@@ -45,22 +45,22 @@ def get_application_icon():
         "./assets/icons/weather_icon.ico",
     ]
 
-    # بررسی هر مسیر
+    # Check each path
     for icon_path in possible_paths:
         if os.path.exists(icon_path):
             try:
                 app_icon = QIcon(icon_path)
-                # بررسی می‌کنیم که آیکون معتبر باشد
+                # Check if the icon is valid
                 if not app_icon.isNull():
-                    print(f"✅ آیکون برنامه از مسیر زیر بارگذاری شد: {icon_path}")
+                    print(f"✅ Application icon loaded from: {icon_path}")
                     return app_icon
                 else:
-                    print(f"⚠️  آیکون در مسیر {icon_path} معتبر نیست")
+                    print(f"⚠️ Icon at {icon_path} is not valid")
             except Exception as e:
-                print(f"⚠️  خطا در بارگذاری آیکون از {icon_path}: {e}")
+                print(f"⚠️ Error loading icon from {icon_path}: {e}")
 
-    # اگر هیچ آیکونی پیدا نشد، از آیکون پیش‌فرض استفاده کن
-    print("🔷 از آیکون پیش‌فرض استفاده می‌شود")
+    # If no icon found, use fallback icon
+    print("🔷 Using fallback icon")
     return create_fallback_icon()
 
 
@@ -69,7 +69,7 @@ def main():
     app.setApplicationName("SmartWeather Pro")
     app.setApplicationVersion("2.0")
 
-    # تنظیم آیکون برنامه
+    # Set application icon
     app_icon = get_application_icon()
     app.setWindowIcon(app_icon)
 
@@ -81,7 +81,7 @@ def main():
 
     window = MainWindow(API_KEY)
 
-    # تنظیم آیکون برای پنجره اصلی
+    # Set icon for main window
     window.setWindowIcon(app_icon)
 
     window.show()
