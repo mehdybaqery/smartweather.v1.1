@@ -1,4 +1,4 @@
-//
+
 """
 SmartWeather Pro - Modern Weather Application
 """
